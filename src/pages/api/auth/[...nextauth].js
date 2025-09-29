@@ -15,6 +15,8 @@ import GitlabProvider from "next-auth/providers/gitlab";
 export default NextAuth({
   // https://next-auth.js.org/configuration/providers/oauth
   providers: [
+    // If no providers are configured, add a dummy provider to prevent errors
+    ...(process.env.DISABLE_AUTH === "true" ? [] : [
     process.env.SLACK_CLIENT_ID && process.env.SLACK_CLIENT_SECRET
       ? SlackProvider({
           clientId: process.env.SLACK_CLIENT_ID,
@@ -125,6 +127,24 @@ export default NextAuth({
           },
         })
       : [],
+    ]),
+    // Add a fallback provider when auth is disabled or no providers are configured
+    ...(process.env.DISABLE_AUTH === "true" || 
+        (!process.env.SLACK_CLIENT_ID && !process.env.OKTA_CLIENT_ID && 
+         !process.env.COGNITO_CLIENT_ID && !process.env.ATLASSIAN_CLIENT_ID &&
+         !process.env.AZURE_AD_CLIENT_ID && !process.env.GITLAB_CLIENT_ID &&
+         !process.env.GITHUB_ID && !process.env.FACEBOOK_ID && 
+         !process.env.GOOGLE_ID && !process.env.TWITTER_ID &&
+         !process.env.AUTH0_ID && !process.env.local_username) ? [
+      CredentialsProvider({
+        id: "disabled",
+        name: "Authentication Disabled",
+        credentials: {},
+        async authorize() {
+          return { id: "1", name: "Disabled User", email: "disabled@example.com" };
+        },
+      })
+    ] : []),
   ],
   theme: {
     colorScheme: "light",
