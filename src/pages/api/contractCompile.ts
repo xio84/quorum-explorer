@@ -8,11 +8,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<CompiledContract>
 ) {
-  const checkSession = await apiAuth(req, res);
-  if (!checkSession) {
-    return;
-  }
-  // console.log(req.body);
+  console.log("Starting contract compilation");
+  console.log(req.body);
   let output: any = await compile(req.body.content, req.body.version);
   res.status(200).json(output);
 }
