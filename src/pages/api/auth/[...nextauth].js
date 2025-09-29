@@ -5,6 +5,12 @@ import GithubProvider from "next-auth/providers/github";
 import TwitterProvider from "next-auth/providers/twitter";
 import Auth0Provider from "next-auth/providers/auth0";
 import CredentialsProvider from "next-auth/providers/credentials";
+import SlackProvider from "next-auth/providers/slack";
+import OktaProvider from "next-auth/providers/okta";
+import CognitoProvider from "next-auth/providers/cognito";
+import AtlassianProvider from "next-auth/providers/atlassian";
+import AzureADProvider from "next-auth/providers/azure-ad";
+import GitlabProvider from "next-auth/providers/gitlab";
 
 export default NextAuth({
   // https://next-auth.js.org/configuration/providers/oauth
