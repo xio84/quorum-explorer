@@ -3,20 +3,32 @@
   "nodes": [
     {
       "name": "validator1",
-      "client": "goquorum",
+      "client": "besu",
       "rpcUrl": "http://172.23.79.11:8545",
       "privateTxUrl": ""
     },
     {
       "name": "validator2",
-      "client": "goquorum",
+      "client": "besu",
       "rpcUrl": "http://172.23.79.12:8545",
       "privateTxUrl": ""
     },
     {
+      "name": "validator2a",
+      "client": "besu",
+      "rpcUrl": "http://172.23.79.12:8645",
+      "privateTxUrl": ""
+    },
+    {
       "name": "validator3",
-      "client": "goquorum",
+      "client": "besu",
       "rpcUrl": "http://172.23.79.13:8545",
+      "privateTxUrl": ""
+    },
+    {
+      "name": "validator4",
+      "client": "besu",
+      "rpcUrl": "http://172.23.79.13:8645",
       "privateTxUrl": ""
     }
   ]
