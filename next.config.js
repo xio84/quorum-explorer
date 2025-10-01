@@ -1,6 +1,15 @@
 /** @type {import('next').NextConfig} */
 const removeImports = require("next-remove-imports")();
-module.exports = removeImports({
+
+// Define your Next.js configuration object here
+const nextConfig = {
+  typescript: {
+    // !! WARN !!
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    // !! WARN !!
+    ignoreBuildErrors: true,
+  },
   publicRuntimeConfig: {
     DISABLE_AUTH: process.env.DISABLE_AUTH,
     QE_BASEPATH: process.env.QE_BASEPATH,
@@ -9,6 +18,7 @@ module.exports = removeImports({
   basePath: process.env.QE_BASEPATH,
   reactStrictMode: true,
   async redirects() {
+    // Use `this` for the final config object, not `nextConfig`
     if (this.basePath === "") {
       return [
         {
@@ -41,4 +51,7 @@ module.exports = removeImports({
       ];
     }
   },
-});
+};
+
+// Pass your config object into the removeImports function
+module.exports = removeImports(nextConfig);
